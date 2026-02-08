@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Butki ❤️ My Valentine</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: white;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .heart {
+      font-size: 100px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    h1 {
+      margin: 20px 0 30px;
+      font-size: 28px;
+      line-height: 1.4;
+    }
+
+    .buttons {
+      position: relative;
+      height: 120px;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 14px 35px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #yesBtn {
+      background: #fff;
+      color: #ff2f5b;
+      font-weight: bold;
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.1);
+    }
+
+    #noBtn {
+      background: #ff2f5b;
+      color: white;
+      position: absolute;
+      left: 60%;
+      top: 0;
+    }
+
+    .message {
+      margin-top: 30px;
+      font-size: 32px;
+      display: none;
+    }
+
+    .flying-heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 24px;
+      animation: fly 4s linear forwards;
+    }
+
+    @keyframes fly {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Romantic Background Music -->
+  <audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7b6b3c7a94.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="container">
+    <div class="heart">❤️</div>
+
+    <h1>
+      I Love You Butki 😘 <br>
+      Forever till my last breath <br>
+      Will you be my Valentine?
+    </h1>
+
+    <div class="buttons">
+      <button id="yesBtn">YES 💖</button>
+      <button id="noBtn">NO 😜</button>
+    </div>
+
+    <div class="message" id="loveMsg">
+      Yay Butki! ❤️ <br>
+      Let’s go on a date 🥰🌹
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const loveMsg = document.getElementById("loveMsg");
+    const bgMusic = document.getElementById("bgMusic");
+
+    function moveNoButton() {
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 120);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+    noBtn.addEventListener("mouseover", moveNoButton);
+    noBtn.addEventListener("click", moveNoButton);
+
+    yesBtn.addEventListener("click", () => {
+      bgMusic.play();
+      loveMsg.style.display = "block";
+      yesBtn.style.display = "none";
+      noBtn.style.display = "none";
+      startHearts();
+    });
+
+    function startHearts() {
+      for (let i = 0; i < 35; i++) {
+        setTimeout(createHeart, i * 120);
+      }
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "flying-heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 5000);
+    }
+  </script>
+
+</body>
+</html>
